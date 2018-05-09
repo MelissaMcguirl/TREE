@@ -1,5 +1,5 @@
 # TREE
-A fast topological recombination estimator 
+Topological Recombination Efficient Estimator 
 
 Authors: Devon P. Humphreys, Melissa R. McGuirl, Michael Miyagi, Andrew J. Blumberg
 
