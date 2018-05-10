@@ -20,8 +20,9 @@ Dependencies: Ripser (https://github.com/Ripser/ripser), Python 2.7 or higher, m
 Usage: python TREE.py -i INPUT_FILE -t INPUT_TYPE -s SLIDING_WINDOW_FLAG -p PLOT_FLAG
 
 Examples:    
-            (1) python TREE.py -i ../examples/seqs_test.fasta (input = FASTA file)
-            (2) python TREE.py -i ../examples/hamming_example -t DIST (input = distance matrix)
+      
+      1) python TREE.py -i ../examples/seqs_test.fasta (input = FASTA file)   
+      2) python TREE.py -i ../examples/hamming_example -t DIST (input = distance matrix)
 
 Pipeline:
 
