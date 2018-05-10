@@ -5,7 +5,7 @@ Authors: Devon P. Humphreys, Melissa R. McGuirl, Michael Miyagi, Andrew J. Blumb
 
 For questions/comments please contact Melissa R. McGuirl at melissa_mcguirl@brown.edu.
 
-This software takes as input either (1) a collection of genomes in FASTA format or (2) a distance matrix and predicts the underlying recombination rate from topological summary statistics of the data. The supported distance matrix formats are those formats that are currently supported by Ripser:
+This software takes as input either (1) a collection of genomes in FASTA format  or (2) a distance matrix and predicts the underlying recombination rate from topological summary statistics of the data. The supported distance matrix formats are those formats that are currently supported by Ripser:
 
       -comma-separated values lower triangular distance matrix (preferred)
       -comma-separated values upper triangular distance matrix (MATLAB output from the function pdist)
@@ -17,7 +17,8 @@ This software is based upon the work presented in Humphreys, D.P., McGuirl, M.R.
 
 Dependencies: Ripser (https://github.com/Ripser/ripser), Python 2.7 or higher, matplotlib, numpy
 
-Usage: python TREE.py -i INPUT_FILE -t INPUT_TYPE -s SLIDING_WINDOW_FLAG -p PLOT_FLAG
+Usage: python TREE.py -i INPUT_FILE [-t INPUT_TYPE] [-s SLIDING_WINDOW_FLAG] [-p PLOT_FLAG]
+Note, the default input type is a FASTA file. 
 
 Examples:    
       
