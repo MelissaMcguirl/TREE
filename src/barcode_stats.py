@@ -37,14 +37,16 @@ def getBars(RipserFile):
 		elif count ==1:
 			count = 2
 		elif count ==2:
-
+                        # Add dimension 0 bars
 			if line != '':
 				line = line.split(',')
 				dim0.append([line[0], line[1]])
 			else:
+                                # moving into dimension 1
 				count = 3
 		elif count ==3:
 			if line != '':
+                                # add in dimension 1 bars
 				line = line.split(',')
 				dim1.append([line[0], line[1]])
 			else:
@@ -52,13 +54,12 @@ def getBars(RipserFile):
 
 	return end_point, dim0, dim1
 
-# A function that extracts basic barcode stats from barcode data
+# A function that extracts TREE barcode stats from barcode data
 def barStats(endpoint, dim0, dim1, BarcodeFile):
 	barlengths0 = []
 	barlengths1 = []
 
 	# compute all barlengths
-
 	if len(dim0) > 1:
 		for i in range(len(dim0) - 1):
 			barlengths0.append(float(dim0[i][1]) - float(dim0[i][0]))
@@ -66,11 +67,11 @@ def barStats(endpoint, dim0, dim1, BarcodeFile):
 	else:
 		barlengths0.append(endpoint)
 
+        # repeat for dim 1
 	for i in range(len(dim1)):
 		barlengths1.append(float(dim1[i][1]) - float(dim1[i][0]))
-
-
-	# Get betti, mean bar length, median bar length, max bar length, and bars above .5*max
+        
+        # compute psi and phi
 	if barlengths0 != []:
 		avg0 = np.mean(barlengths0)
 		var0 = np.var(barlengths0)
@@ -79,6 +80,7 @@ def barStats(endpoint, dim0, dim1, BarcodeFile):
 		avg0 = 0 
 		var0 = 0 
 
+        # compute betti1
 	if barlengths1 != []:
 		betti1 = len(barlengths1)
 	else:

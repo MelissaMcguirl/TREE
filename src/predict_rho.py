@@ -3,7 +3,7 @@ import glob
 import numpy as np
 import matplotlib.pyplot as plt
 
-
+# a function to extract barcode stats from file
 def get_bstats(file):
     stats = open(file, 'r')
     stats = stats.readlines()
@@ -13,7 +13,7 @@ def get_bstats(file):
     b1 = float(stats[2][:-1])
     return avg0, var0, b1
 
-
+# a function to compute log(TREE)
 def log_rho(avg0, var0, b1):
     A =  5.53046629e-02
     B =  -3.74380246e-04
@@ -37,6 +37,7 @@ def main():
     rho_pred = []
     window = []
     psi = []
+    # loop through files in directory and predict recombination 
     for file in files:
         avg0, var0, b1 = get_bstats(file)
         logrho_pred = log_rho(avg0, var0, b1)
@@ -47,6 +48,7 @@ def main():
         psi.append(avg0)
         j = j + 1
 
+    # plot results
     fig, ax = plt.subplots()
     ax.scatter(window, rho_pred, edgecolors=(0, 0, 0))
     ax.set_ylabel('rho')
