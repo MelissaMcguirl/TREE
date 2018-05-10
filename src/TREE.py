@@ -12,7 +12,7 @@
     Corresponding Author: Melissa McGuirl (melissa_mcguirl@brown.edu)
     Updated: 05/10/18
 '''
-import glob, time
+import subprocess, os, time
 from data_processing import *
 from barcode_stats import getBars, barStats
 from predict_rho import *
@@ -23,7 +23,7 @@ def main():
 
     descriptor = '''A Topological Recombination Rate Efficient Estimator. This
     software takes as input either a collection of sequence alignments in FASTA
-    format (*.fasta) or a distance matrix.'''
+    format or a distance matrix (specify if inputting distance matrix.)'''
     
     parser = argparse.ArgumentParser(description = descriptor)
 
@@ -58,11 +58,9 @@ def main():
 
     # run ripser. 
     RipserFile = "RipserFile"
-    run_Ripser(HammingFile, RipserFile)
-    print("Persistent Homology Computations complete.")
-    # reformat ripser
-    reformat_Ripser(RipserFile)
-    # separate out barcodes 
+    cmd = "ripser %s | cut -f 2 -d: | awk 'NR > 1 {print}' | cut -c 3- | sed 's/.$//' > %s" % (HammingFile,  RipserFile)
+    os.system(cmd)
+    print("Persistent Homology computations complete.")
     end_point, dim0, dim1 = getBars(RipserFile)
     # compute barcode statistics 
     StatsFile = "BCStats"

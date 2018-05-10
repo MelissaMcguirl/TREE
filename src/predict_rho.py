@@ -1,3 +1,14 @@
+'''
+        predict_rho.py
+  
+        Input: provide path to barcode stats files
+  
+        Usage: python barcode_stats.py -i  <path/to/stats/files>
+  
+        Authors: Devon Humphreys, Melissa McGuirl, Michael Miyagi
+        Corresponding Author: Melissa McGuirl (melissa_mcguirl@brown.edu)
+        Updated: 05/10/18
+'''
 import argparse
 import glob
 import numpy as np

@@ -19,13 +19,11 @@ import glob
 
 # A function that extracts barcodes from ripser output
 def getBars(RipserFile):
-
-	with open(RipserFile) as f:
-		lines = f.read().splitlines()
-	lines.pop(0)
+        
+        inFile = open(RipserFile, 'r')
+        lines = inFile.read().splitlines()
 	dim0 = []
 	dim1 = []
-	dim2 = []
 	# get endpoint while extracting lines
 	count = 0
 	for line in lines:

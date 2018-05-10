@@ -1,6 +1,4 @@
 '''
-
-
     Python functions to run the pipeline of analyses for topological data
     analysis on genome sequence alignments for recombination detection.
     To be used with TREE.py.
@@ -68,24 +66,3 @@ def reformat_Hamming(Ham_file):
       #  print(line)
     return None
 
-# @profile
-def reformat_Ripser(Ripser_file):
-    '''Returns a modified Ripser output file for use with the barcodestats
-    module'''
-    for line in fileinput.input(Ripser_file, inplace = True):
-        line = re.sub('persistence intervals in dim ' + '(0|1|2|3):', '\n',
-                        line, flags = re.M).rstrip()
-        line = re.sub('(\)|]|\[|value range: |distance matrix with \d+ points|\s)',
-                        '', line, flags = re.M).rstrip()
-#        print(line)
-
-# @profile
-def run_Ripser(HammingFile, RipserFile):
-    '''Runs Ripser on the Hamming distance matrix for computation of
-    Homology groups for topological data analysis'''
-    Ham = open(HammingFile, "r")
-    Rip = open(RipserFile, "w")
-    cmd = ['ripser --dim 1']
-    rip = subprocess.Popen(cmd, stdin = Ham, stdout = Rip, shell = True,
-                            bufsize = -1, executable = '/bin/bash')
-    rip.communicate()
