@@ -19,16 +19,17 @@ Dependencies: Ripser (https://github.com/Ripser/ripser), Python 2.7 or higher, m
 
 Usage: python TREE.py -i INPUT_FILE -t INPUT_TYPE -s SLIDING_WINDOW_FLAG -p PLOT_FLAG
 
-Example: (1) python TREE.py -i ../examples/seqs_test.fasta (input = FASTA file)
-         (2) python TREE.py -i ../examples/hamming_example -t DIST (input = distance matrix)
+Examples:    
+            (1) python TREE.py -i ../examples/seqs_test.fasta (input = FASTA file)
+            (2) python TREE.py -i ../examples/hamming_example -t DIST (input = distance matrix)
 
 Pipeline:
 
-0) Compute Hamming distance matrix
-1) Feed Hamming distance matrix into Ripser to compute dimension 0 and dimension 1 persistent homology barcodes
-2) Extract topological summary statistics (psi, b1, phi)
-3) Predict recombination rate using TREE 
-4) Plot results (for slidding windows)
+      0) Compute Hamming distance matrix
+      1) Feed Hamming distance matrix into Ripser to compute dimension 0 and dimension 1 persistent homology barcodes
+      2) Extract topological summary statistics (psi, b1, phi)
+      3) Predict recombination rate using TREE 
+      4) Plot results (for slidding windows)
 
 
 To Do:
