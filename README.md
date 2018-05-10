@@ -36,7 +36,8 @@ Pipeline:
 
 To Do:
 
+      -Code testing and verification.
       -Add normalization options.
       -Add Sliding window analysis with plots.
-      -Streamline everything instead of reading/writing to file (make this an option but not required)
+ 
       
