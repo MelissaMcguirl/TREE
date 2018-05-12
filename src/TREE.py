@@ -38,10 +38,13 @@ def main():
                         input.''')
     parser.add_argument('-s', '--swindow', action = 'store_true', required = False,
                         help = '''run a sliding window analysis''')
-    parser.add_argument('-w', '--window', action = 'store', required = False,
+    parser.add_argument('-w', '--WindowSize', action = 'store', required = False,
                         help = '''provide size of sliding window''')
     parser.add_argument('-o', '--output', action = 'store', required = False,
                         help = '''provide name for output file, if desired''')
+    parser.add_argument('-n', '--name', action = 'store', required = False,
+                        help =''' provide unique identifier for a batch of sliding
+                                window runs''')
 
     args = parser.parse_args()
     glob_start = time.time()
@@ -81,6 +84,24 @@ def main():
     # print outputs
     print("TREE Prediction: rho^={0}".format(pred_rho))
     print("Total time: {0}".format(glob_end - glob_start))
+
+
+    if args.swindow:
+        inFile  = args.indir
+        OUT = args.output
+        N = args.windowSize
+        name = args.name
+        data = process_data(inFile)
+
+        # get sliding window data
+        s_data = segWindow(data, int(N))
+        #get barcode stats
+        getBarCodeStats(s_data, name, OUT)
+
+        # plot results
+        Stats_files = glob.glob(OUT + '/BStats_' + name + '_window_*.txt')
+        #plotSplitStats(Stats_files, name)
+        plotPsi(Stats_files)
 
 
 
