@@ -12,6 +12,7 @@
     Corresponding Author: Melissa McGuirl (melissa_mcguirl@brown.edu)
     Updated: 05/10/18
 '''
+from swindow import *
 import subprocess, os, time
 from data_processing import *
 from barcode_stats import getBars, barStats
@@ -24,7 +25,7 @@ def main():
     descriptor = '''A Topological Recombination Rate Efficient Estimator. This
     software takes as input either a collection of sequence alignments in FASTA
     format or a distance matrix (specify if inputting distance matrix.)'''
-    
+
     parser = argparse.ArgumentParser(description = descriptor)
 
     parser.add_argument('-i', '--indir',
@@ -35,6 +36,12 @@ def main():
     parser.add_argument('-t', '--InType', action = 'store', required = False,
                         default = 'FASTA', help = '''specify FASTA or DIST
                         input.''')
+    parser.add_argument('-s', '--swindow', action = 'store_true', required = False,
+                        help = '''run a sliding window analysis''')
+    parser.add_argument('-w', '--window', action = 'store', required = False,
+                        help = '''provide size of sliding window''')
+    parser.add_argument('-o', '--output', action = 'store', required = False,
+                        help = '''provide name for output file, if desired''')
 
     args = parser.parse_args()
     glob_start = time.time()
@@ -42,10 +49,10 @@ def main():
     inFile = args.indir
     inType = args.InType
 
-    
+
     if inType == 'FASTA':
         # compute Hamming distance matrix and reformat it for Ripser inputs.
-        HammingFile = "HammingMat" 
+        HammingFile = "HammingMat"
         lines = format_data(inFile, 'fasta')
         matrix = empty_matrix(lines)
         hamm_matrix = populate_matrix(matrix, lines)
@@ -56,24 +63,29 @@ def main():
     else:
         HammingFile = inFile
 
-    # run ripser. 
+    # run ripser.
     RipserFile = "RipserFile"
     cmd = "ripser %s | cut -f 2 -d: | awk 'NR > 1 {print}' | cut -c 3- | sed 's/.$//' > %s" % (HammingFile,  RipserFile)
     os.system(cmd)
     print("Persistent Homology computations complete.")
     end_point, dim0, dim1 = getBars(RipserFile)
-    # compute barcode statistics 
+    # compute barcode statistics
     StatsFile = "BCStats"
     barStats(end_point,dim0, dim1, StatsFile)
     avg0, var0, b1 = get_bstats(StatsFile)
     # compute log rho
     logrho_pred = log_rho(avg0, var0, b1)
-    # convert to TREE predictions 
+    # convert to TREE predictions
     pred_rho = np.exp(logrho_pred)
     glob_end = time.time()
-    # print outputs 
-    print("TREE Prediction: rho={0}".format(pred_rho))
+    # print outputs
+    print("TREE Prediction: rho^={0}".format(pred_rho))
     print("Total time: {0}".format(glob_end - glob_start))
+
+    if args.swindow:
+        data = process_data(inFile)
+        s_window = Slid_Window(data, )
+
 
 
 if __name__=="__main__":
