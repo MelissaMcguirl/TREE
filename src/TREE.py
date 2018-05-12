@@ -82,10 +82,6 @@ def main():
     print("TREE Prediction: rho^={0}".format(pred_rho))
     print("Total time: {0}".format(glob_end - glob_start))
 
-    if args.swindow:
-        data = process_data(inFile)
-        s_window = Slid_Window(data, )
-
 
 
 if __name__=="__main__":
