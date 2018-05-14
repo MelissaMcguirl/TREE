@@ -56,8 +56,11 @@ def main():
     if inType == 'FASTA':
         # compute Hamming distance matrix and reformat it for Ripser inputs.
         HammingFile = "HammingMat"
+        print("Reading FASTA file...")
         lines = format_data(inFile, 'fasta')
+        print("FASTA file read.")
         matrix = empty_matrix(lines)
+        print("Computing Hamming distance matrix...")
         hamm_matrix = populate_matrix(matrix, lines)
         print("Hamming distance matrix computed.")
         print_to_file(hamm_matrix, HammingFile)
@@ -91,17 +94,23 @@ def main():
         OUT = args.output
         N = args.windowSize
         name = args.name
+        print("Processing data...")
         data = process_data(inFile)
-
+        print("Data processing done.")
         # get sliding window data
+        print("Begin sliding window...")
         s_data = segWindow(data, int(N))
+        print("Sliding window analysis complete.")
         #get barcode stats
+        print("Processing barcode statistics...")
         getBarCodeStats(s_data, name, OUT)
-
+        print("Barcodes processed.")
         # plot results
+        print("Plotting results...")
         Stats_files = glob.glob(OUT + '/BStats_' + name + '_window_*.txt')
         #plotSplitStats(Stats_files, name)
         plotPsi(Stats_files)
+        print("TREE analysis complete.")
 
 
 
