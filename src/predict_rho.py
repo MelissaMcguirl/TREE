@@ -1,10 +1,10 @@
 '''
         predict_rho.py
-  
+
         Input: provide path to barcode stats files
-  
+
         Usage: python barcode_stats.py -i  <path/to/stats/files>
-  
+
         Authors: Devon Humphreys, Melissa McGuirl, Michael Miyagi
         Corresponding Author: Melissa McGuirl (melissa_mcguirl@brown.edu)
         Updated: 05/10/18
@@ -33,7 +33,8 @@ def log_rho(avg0, var0, b1):
     E =  -5.93368387e-05
     y_int = 2.24756003254
     logrho = A*avg0 + B*var0 + C*b1 + D*(avg0**2) + E*(b1**2) +  y_int
-    return logrho 
+    rho = np.exp(logrho_pred)/1000
+    return rho
 
 
 def main():
@@ -43,12 +44,12 @@ def main():
     parser.add_argument('-i', '--indir', required = True, help = 'provide path to folder containing barcode stats, labeled as BCStats*')
     args = parser.parse_args()
     IN = args.indir
-    
+
     files = glob.glob(IN + '/BCStats_*')
     rho_pred = []
     window = []
     psi = []
-    # loop through files in directory and predict recombination 
+    # loop through files in directory and predict recombination
     for file in files:
         avg0, var0, b1 = get_bstats(file)
         logrho_pred = log_rho(avg0, var0, b1)
