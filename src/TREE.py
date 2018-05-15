@@ -41,7 +41,8 @@ def main():
     parser.add_argument('-w', '--WindowSize', action = 'store', required = False,
                         help = '''provide size of sliding window''')
     parser.add_argument('-o', '--output', action = 'store', required = False,
-                        help = '''provide name for output file, if desired''')
+                        help = '''provide directory in which output files should
+                                be stored.''')
     parser.add_argument('-n', '--name', action = 'store', required = False,
                         help =''' provide unique identifier for a batch of sliding
                                 window runs''')
@@ -68,6 +69,33 @@ def main():
         else:
             HammingFile = inFile
 
+        # run ripser.
+        RipserFile = "RipserFile"
+        #cmd = "ripser %s | cut -f 2 -d: | awk 'NR > 1 {print}' | cut -c 3- | sed 's/.$//' > %s" % (HammingFile,  RipserFile)
+        #os.system(cmd)
+        print("Running Ripser...")
+        run_Ripser(HammingFile, RipserFile)
+        print("Ripser analysis complete.")
+        reformat_Ripser(RipserFile)
+        print("Persistent Homology computations complete.")
+        end_point, dim0, dim1 = getBars(RipserFile)
+        # compute barcode statistics
+        StatsFile = "BCStats"
+        print("Computing barcode statistics...")
+        barStats(end_point, dim0, dim1, StatsFile)
+        avg0, var0, b1 = get_bstats(StatsFile)
+        print("Barcode statistics complete.\n")
+        print("Psi={0}\nVariance={1}\nBetti1={2}\n".format(avg0, var0, b1))
+        # compute log rho
+        print("Computing Rho^...")
+        logrho_pred = log_rho(avg0, var0, b1)
+        # convert to TREE predictions
+        pred_rho = np.exp(logrho_pred)
+        print("Rho estimation complete.\n")
+        glob_end = time.time()
+        # print outputs
+        print("TREE Prediction: rho^={0}".format(pred_rho))
+        print("Total time: {0}".format(glob_end - glob_start))
 
     elif args.swindow:
         inFile  = args.indir
@@ -89,28 +117,8 @@ def main():
         print("Plotting results...")
         Stats_files = glob.glob(OUT + '/BStats_' + name + '_window_*.txt')
         #plotSplitStats(Stats_files, name)
-        plotPsi(Stats_files)
+        plot_TREE(Stats_files)
         print("TREE analysis complete.")
-
-    # run ripser.
-    RipserFile = "RipserFile"
-    cmd = "ripser %s | cut -f 2 -d: | awk 'NR > 1 {print}' | cut -c 3- | sed 's/.$//' > %s" % (HammingFile,  RipserFile)
-    os.system(cmd)
-    print("Persistent Homology computations complete.")
-    end_point, dim0, dim1 = getBars(RipserFile)
-    # compute barcode statistics
-    StatsFile = "BCStats"
-    barStats(end_point,dim0, dim1, StatsFile)
-    avg0, var0, b1 = get_bstats(StatsFile)
-    # compute log rho
-    logrho_pred = log_rho(avg0, var0, b1)
-    # convert to TREE predictions
-    pred_rho = np.exp(logrho_pred)
-    glob_end = time.time()
-    # print outputs
-    print("TREE Prediction: rho^={0}".format(pred_rho))
-    print("Total time: {0}".format(glob_end - glob_start))
-
 
 
 
