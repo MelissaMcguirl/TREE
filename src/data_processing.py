@@ -33,6 +33,8 @@ def format_data(input_file, filetype):
     else:
         with open(input_file, 'r') as f:
             lines = f.readlines()[1:]
+    for line in lines:
+        line = ''.join([i for i in line if not i.isdigit()])
     return lines
 
 def empty_matrix(lines):
@@ -49,11 +51,10 @@ def populate_matrix(matrix, lines):
 
 def print_to_file(data, filename):
     '''Prints Hamming distance matrix to a file in usable format'''
-    outfile = open(filename, "w")
+    outfile = open(filename, "w+")
     data = str(data.tolist())
     outfile.write(data)
     outfile.close()
-    return None
 
 # @profile
 def reformat_Hamming(Ham_file):
@@ -61,8 +62,38 @@ def reformat_Hamming(Ham_file):
     for use with Ripser'''
     for line in fileinput.input(Ham_file, inplace = True):
         line = re.sub(']', '\n', line, flags = re.M)#.rstrip()
-        line = re.sub('(\[|^,)', '', line, flags = re.M)
-        line = re.sub('^\s+', '', line, flags = re.M)
-      #  print(line)
+        #line = re.sub('(\[|^,)', '', line, flags = re.M)
+        #line = re.sub('^\s+', '', line, flags = re.M)
+        print(line)
     return None
 
+def reformat_Hamming(Ham_file):
+    '''Returns reformatted output Hamming file
+    for use with Ripser'''
+    for line in fileinput.input(Ham_file, inplace = True):
+        line = re.sub(']', '\n', line, flags = re.M)#.rstrip()
+        line = re.sub('(\[|^,)', '', line, flags = re.M)
+        line = re.sub('^\s+', '', line, flags = re.M)
+        print(line)
+    return None
+
+# @profile
+def run_Ripser(HammingFile, RipserFile):
+    '''Runs Ripser on the Hamming distance matrix for computation of
+    Homology groups for topological data analysis'''
+    Ham = open(HammingFile, "r")
+    Rip = open(RipserFile, "w")
+    cmd = ['ripser --dim 2']
+    rip = subprocess.Popen(cmd, stdin = Ham, stdout = Rip, shell = True,
+                            bufsize = -1, executable = '/bin/bash')
+    rip.communicate()
+
+def reformat_Ripser(Ripser_file):
+    '''Returns a modified Ripser output file for use with the barcodestats
+    module'''
+    for line in fileinput.input(Ripser_file, inplace = True):
+        line = re.sub('persistence intervals in dim ' + '(0|1|2|3):', '\n',
+                        line, flags = re.M).rstrip()
+        line = re.sub('(\)|]|\[|value range: |distance matrix with \d+ points|\s)',
+                        '', line, flags = re.M).rstrip()
+        print(line)
