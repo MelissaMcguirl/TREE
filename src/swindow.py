@@ -4,8 +4,9 @@
 
 from numpy import *
 import matplotlib.pyplot as plt
-
-e#Restrictions:
+from data_processing import *
+from barcode_stats import *
+#Restrictions:
 #NumSites should be even. For reasonable behavior, make offset=length/2
 
 def segWindow(inpMat,numsites):
@@ -26,7 +27,7 @@ def process_data(inFile):
     data = infile.readlines()[1::2]
     for i in data:
         i = i[3021:]
-    for i in xrange(len(data)):
+    for i in range(len(data)):
         data[i] =  ''.join([x for x in data[i] if not x.isdigit()])
         data[i] = data[i].replace(' ', '')
         data[i] = data[i][:-1]
@@ -48,8 +49,8 @@ def getBarCodeStats(s_data, name, OUT):
         run_Ripser(HammingFile, RipserFile)
         reformat_Ripser(RipserFile)
     # Get barcode stats
-        end_point, dim0, dim1, dim2 = getBars(RipserFile)
-        barStats(end_point, 0.5, dim0, dim1, dim2, StatsFile)
+        end_point, dim0, dim1 = getBars(RipserFile)
+        barStats(end_point, dim0, dim1, StatsFile)
         print("Window {0} complete".format(i))
 
 # plot avg0, avg1, b0, and b1 as window slides across genomes
@@ -83,20 +84,19 @@ def plotSplitStats(files, name):
     plt.suptitle('Barcode stats across a sliding window, ' + name)
     plt.savefig(name)
 
-def plotPsi(files):
+def plot_TREE(files):
     avg0 = []
     window = []
     # get stats
     for file in files:
-        stats = open(file, 'r')
-        stats = stats.readlines()
-        #b0.append(float(stats[0]))
-        avg0.append(float(stats[1]))
-        #b1.append(float(stats[5]))
-        #avg1.append(float(stats[6]))
-        start = file.index('_window_') + 8
-        end = file.index('.txt')
-        window.append(float(file[start:end]))
+        avg0, var0, b1 = get_bstats(file)
+        logrho_pred = log_rho(avg0, var0, b1)
+        rho_pred.append(np.exp(logrho_pred)/1000)
+
+        window_start = f.index('window_') + 7
+        window_end = f.index('.txt')
+        window.append(float(f[window_start:window_end]))
+
     # plot
     #f, axarr = plt.subplots(2, 2)
     fig = plt.figure()
