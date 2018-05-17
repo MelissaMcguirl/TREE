@@ -22,8 +22,9 @@ Note, the default input type is a FASTA file.
 
 Examples:    
 
-      1) python TREE.py -i ../examples/seqs_test.fasta (input = FASTA file)   
+      1) python TREE.py -i ../examples/seq_example.fasta (input = FASTA file)   
       2) python TREE.py -i ../examples/hamming_example -t DIST (input = distance matrix)
+      3) python TREE.py -i ../examples/seq_example.fasta -s -w 20 -o ../examples/output/ -n test (sliding window analysis)
 
 Pipeline:
 
@@ -33,9 +34,5 @@ Pipeline:
       3) Predict recombination rate using TREE
       4) Plot results (for sliding windows)
 
-
-To Do:
-
-      -Code testing and verification.
-      -Add normalization options.
-      -Add Sliding window analysis with plots.
+Help:
+      0) python TREE.py -h
