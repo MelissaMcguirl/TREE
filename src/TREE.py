@@ -90,7 +90,7 @@ def main():
         print("Computing Rho^...")
         logrho_pred = log_rho(avg0, var0, b1)
         # convert to TREE predictions
-        pred_rho = np.exp(logrho_pred)
+        pred_rho = np.exp(logrho_pred)/1000
         print("Rho estimation complete.\n")
         glob_end = time.time()
         # print outputs
