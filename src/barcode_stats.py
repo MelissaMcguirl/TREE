@@ -27,7 +27,6 @@ def getBars(RipserFile):
     count = 0
     for line in lines:
         if line != '':
-            print(line)
             line = line.split(",")
             start_point = float(line[0])
             try:
@@ -41,7 +40,6 @@ def getBars(RipserFile):
                 dim1.append([start_point, end_point])
     dim0.remove([0.0, ''])
     end_point = lines[1].split(',')[1]
-    print(end_point)
             # if count ==0:
             #     line = line.split(',')
             #     end_point = line[1]
