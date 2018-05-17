@@ -27,6 +27,7 @@ def getBars(RipserFile):
     count = 0
     for line in lines:
         if line != '':
+            print(line)
             line = line.split(",")
             start_point = float(line[0])
             try:
