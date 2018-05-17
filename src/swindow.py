@@ -6,6 +6,7 @@ from numpy import *
 import matplotlib.pyplot as plt
 from data_processing import *
 from barcode_stats import *
+from predict_rho import *
 #Restrictions:
 #NumSites should be even. For reasonable behavior, make offset=length/2
 
@@ -84,18 +85,27 @@ def plotSplitStats(files, name):
     plt.suptitle('Barcode stats across a sliding window, ' + name)
     plt.savefig(name)
 
+def read_stats(file):
+	stats = open(file, 'r')
+	stats = stats.readlines()
+	avg0 = float(stats[0])
+	var0 = float(stats[1])
+	b1 = float(stats[2])
+	return avg0, var0, b1
+
 def plot_TREE(files):
     avg0 = []
     window = []
+    rho_pred = []
     # get stats
     for file in files:
-        avg0, var0, b1 = get_bstats(file)
+        avg0, var0, b1 = read_stats(file)
         logrho_pred = log_rho(avg0, var0, b1)
         rho_pred.append(np.exp(logrho_pred)/1000)
 
-        window_start = f.index('window_') + 7
-        window_end = f.index('.txt')
-        window.append(float(f[window_start:window_end]))
+        window_start = file.index('window_') + 7
+        window_end = file.index('.txt')
+        window.append(float(file[window_start:window_end]))
 
     # plot
     #f, axarr = plt.subplots(2, 2)
@@ -107,8 +117,8 @@ def plot_TREE(files):
     #axes.set_ylim([0, max(np.log(x)) + 1])
     #ax1.set_title(args.title)
     ax1.set_xlabel("Window")
-    ax1.set_ylabel("Psi")
-    ax1.plot(window, avg0, 'b.')
+    ax1.set_ylabel(r"$\rho$")
+    ax1.plot(window, rho_pred, 'b.')
     plt.show()
 
 # compute mean b1
