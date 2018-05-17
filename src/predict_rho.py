@@ -26,6 +26,7 @@ def get_bstats(file):
 
 # a function to compute log(TREE)
 def log_rho(avg0, var0, b1):
+    print("Psi = {0}\nVar = {1}\nB1 = {2}".format(avg0, var0, b1))
     A =  5.53046629e-02
     B =  -3.74380246e-04
     C = 1.81333434e-02
@@ -33,8 +34,7 @@ def log_rho(avg0, var0, b1):
     E =  -5.93368387e-05
     y_int = 2.24756003254
     logrho = A*avg0 + B*var0 + C*b1 + D*(avg0**2) + E*(b1**2) +  y_int
-    rho = np.exp(logrho_pred)/1000
-    return rho
+    return logrho
 
 
 def main():
