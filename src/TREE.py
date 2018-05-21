@@ -41,8 +41,11 @@ def main():
     parser.add_argument('-w', '--WindowSize', action = 'store', required = False,
                         help = '''provide size of sliding window''')
     parser.add_argument('-o', '--output', action = 'store', required = False,
-                        help = '''provide directory in which output files should
-                                be stored.''')
+                        help = '''provide directory in which output 
+                        files should be stored.''')
+    parser.add_argument('-N', '--normFactor', action = 'store', required =False, 
+                        default = 1000, help =''' provide normalization factor for scaling
+                            rho. Default =1000.''')
     parser.add_argument('-n', '--name', action = 'store', required = False,
                         help =''' provide unique identifier for a batch of sliding
                                 window runs''')
@@ -52,6 +55,7 @@ def main():
 
     inFile = args.indir
     inType = args.InType
+    normFactor = float(args.normFactor)
 
     if not args.swindow:
         if inType == 'FASTA':
@@ -90,7 +94,7 @@ def main():
         print("Computing Rho^...")
         logrho_pred = log_rho(avg0, var0, b1)
         # convert to TREE predictions
-        pred_rho = np.exp(logrho_pred)/1000
+        pred_rho = np.exp(logrho_pred)/normFactor
         print("Rho estimation complete.\n")
         glob_end = time.time()
         # print outputs
