@@ -11,14 +11,15 @@ This software takes as input either (1) a collection of genomes in FASTA format 
       -comma-separated values upper triangular distance matrix (MATLAB output from the function pdist)
       -comma-separated values full distance matrix
 
-The user (will) also has (have) the option getting recombination rate estimates over a sliding window analysis.
+The user has the option getting recombination rate estimates over a sliding window analysis and can specify a normalization factor (default = 1/1000). 
 
 This software is based upon the work presented in Humphreys, D.P., McGuirl, M.R., Miyagi, M., and Blumberg, A.J. Fast Estimation of Recombination Rates Using Topological Data Analysis (2018).
 
 Dependencies: Ripser (https://github.com/Ripser/ripser), Python 2.7 or higher, matplotlib, numpy
 
-Usage: python TREE.py -i INPUT_FILE [-t INPUT_TYPE] [-s SLIDING_WINDOW_FLAG] [-p PLOT_FLAG]
-Note, the default input type is a FASTA file.
+Usage: python TREE.py -i INPUT_FILE [-t INPUT_TYPE] [-s SLIDING_WINDOW_FLAG] [-w WINDOW_SIZE] [-o OUTPUT_DIRECTORY] [-N NORMALIZATION_FACTOR] [-n FILENAME_IDENTIFIER]
+
+Note, the default input type is a FASTA file and the default normalization factor is 1/1000. 
 
 Examples:    
 
