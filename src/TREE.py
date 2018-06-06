@@ -46,6 +46,14 @@ def main():
     parser.add_argument('-n', '--name', action = 'store', required = False,
                         help =''' provide unique identifier for a batch of sliding
                                 window runs''')
+    parser.add_argument('-b', '--base', action = 'store', required = False,
+                        help = '''if doing a sliding window analysis, this flag
+                            sets the window to move across raw base pairs rather than
+                            SNPs. The default behavior is to move over only
+                            segregating sites and ignore constant sites.''')
+    parser.add_argument('-f', '--offset', action = 'store_int', required = False,
+                        help = '''supply the offset for a sliding window using raw
+                            base pairs (how much overlap there will be).''')
 
     args = parser.parse_args()
     glob_start = time.time()
@@ -106,8 +114,12 @@ def main():
         data = process_data(inFile)
         print("Data processing done.")
         # get sliding window data
-        print("Begin sliding window...")
-        s_data = segWindow(data, int(N))
+        if args.base:
+            s_data = baseWindow(data, int(N), args.offset)
+            print("Begin sliding window...")
+        else:
+            s_data = segWindow(data, int(N))
+            print("Begin sliding window...")
         print("Sliding window analysis complete.")
         #get barcode stats
         print("Processing barcode statistics...")
