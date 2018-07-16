@@ -54,7 +54,7 @@ def main():
                             sets the window to move across raw base pairs rather than
                             SNPs. The default behavior is to move over only
                             segregating sites and ignore constant sites.''')
-    parser.add_argument('-f', '--offset', action = 'store_int', required = False,
+    parser.add_argument('-f', '--offset', action = 'store', required = False,
                         help = '''supply the offset for a sliding window using raw
                             base pairs (how much overlap there will be).''')
 
@@ -123,7 +123,7 @@ def main():
             print("Begin sliding window...")
         else:
             s_data = segWindow(data, int(N))
-            print("Begin sliding window...")
+	    print("Begin sliding window...")
         print("Sliding window analysis complete.")
         #get barcode stats
         print("Processing barcode statistics...")

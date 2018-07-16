@@ -32,7 +32,7 @@ def format_data(input_file, filetype):
             lines[i] = lines[i][1:]
     else:
         with open(input_file, 'r') as f:
-            lines = f.readlines()[1:]
+            lines = f.readlines()[1::2]
     for line in lines:
         line = ''.join([i for i in line if not i.isdigit()])
     return lines

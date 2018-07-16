@@ -20,7 +20,8 @@ def segWindow(inpMat,numsites):
 def baseWindow(inpMat,length,offset):
 	windowmat=[]
 	for inp in inpMat:
-		windowmat.append(vstack(([inp[i:i+length] for i in range(0,len(inp)-length+1,length)],[inp[i:i+length] for i in range(offset,len(inp)-length+offset,length)])).reshape((-1,),order='F'))
+		windowmat.append(vstack(([inp[i:i+length] for i in range(0,len(inp)-length+1,length)],[inp[i:i+length]
+		for i in range(offset,len(inp)-length+offset,length)])).reshape((-1,),order='F'))
 	return windowmat
 
 def process_data(inFile):

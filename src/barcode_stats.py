@@ -83,9 +83,13 @@ def barStats(endpoint, dim0, dim1, BarcodeFile):
 
         # compute psi and phi
     if barlengths0 != []:
-        avg0 = np.mean(barlengths0)
-        var0 = np.var(barlengths0)
-
+	try:
+            avg0 = np.mean(barlengths0)
+            var0 = np.var(barlengths0)
+	except TypeError:
+            barlengths0 = [float(barlengths0[i]) for i in range(len(barlengths0))]
+	    avg0 = np.mean(barlengths0)
+            var0 = np.var(barlengths0)
     else:
         avg0 = 0
         var0 = 0
