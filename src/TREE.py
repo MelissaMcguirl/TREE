@@ -57,6 +57,8 @@ def main():
     parser.add_argument('-f', '--offset', action = 'store', required = False,
                         help = '''supply the offset for a sliding window using raw
                             base pairs (how much overlap there will be).''')
+    parser.add_argument('-g', '--graph', action = 'store', required = False,
+                        help='''supply name of graph to write to file''')
 
     args = parser.parse_args()
     glob_start = time.time()
@@ -114,6 +116,7 @@ def main():
         OUT = args.output
         N = args.WindowSize
         name = args.name
+        graph = args.graph
         print("Processing data...")
         data = process_data(inFile)
         print("Data processing done.")
@@ -133,7 +136,7 @@ def main():
         print("Plotting results...")
         Stats_files = glob.glob(OUT + '/BStats_' + name + '_window_*.txt')
         #plotSplitStats(Stats_files, name)
-        plot_TREE(Stats_files)
+        plot_TREE(Stats_files, graph)
         print("TREE analysis complete.")
 
 
