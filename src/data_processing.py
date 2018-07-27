@@ -83,7 +83,7 @@ def run_Ripser(HammingFile, RipserFile):
     Homology groups for topological data analysis'''
     Ham = open(HammingFile, "r")
     Rip = open(RipserFile, "w")
-    cmd = ['ripser --dim 2']
+    cmd = ['ripser --dim 1']
     rip = subprocess.Popen(cmd, stdin = Ham, stdout = Rip, shell = True,
                             bufsize = -1, executable = '/bin/bash')
     rip.communicate()
