@@ -1,5 +1,5 @@
 # TREE
-Topological Recombination Efficient Estimator
+Topological REcombination Estimator
 
 Authors: Devon P. Humphreys, Melissa R. McGuirl, Michael Miyagi, Andrew J. Blumberg
 
