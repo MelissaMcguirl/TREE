@@ -15,7 +15,7 @@ The user has the option getting recombination rate estimates over a sliding wind
 
 This software is based upon the work presented in Humphreys, D.P., McGuirl, M.R., Miyagi, M., and Blumberg, A.J. Fast Estimation of Recombination Rates Using Topological Data Analysis (2018).
 
-Dependencies: Ripser (https://github.com/Ripser/ripser), Python 2.7 or higher, matplotlib, numpy
+Dependencies: Ripser (https://github.com/Ripser/ripser), Python 2.7, matplotlib, numpy
 
 Usage: python TREE.py -i INPUT_FILE [-t INPUT_TYPE] [-s SLIDING_WINDOW_FLAG] [-w WINDOW_SIZE] [-o OUTPUT_DIRECTORY] [-N NORMALIZATION_FACTOR] [-n FILENAME_IDENTIFIER]
 
