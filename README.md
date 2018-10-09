@@ -27,7 +27,9 @@ Examples:
       2) python TREE.py -i ../examples/hamming_example -t DIST (input = distance matrix)
       3) python TREE.py -i ../examples/seq_example.fasta -s -w 20 -o ../examples/outputs -n test -g ../examples/outputs/outputPlt (sliding window analysis)
       
-Sample expected output for the sliding window analysis is provided in examples/outputs/
+Outputs:
+      Sample expected output for the sliding window analysis is provided in examples/outputs/
+      
 Pipeline:
 
       0) Compute Hamming distance matrix
