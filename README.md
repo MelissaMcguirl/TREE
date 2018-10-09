@@ -17,7 +17,7 @@ This software is based upon the work presented in Humphreys, D.P., McGuirl, M.R.
 
 Dependencies: Ripser (https://github.com/Ripser/ripser), Python 2.7, matplotlib, numpy
 
-Usage: python TREE.py -i INPUT_FILE [-t INPUT_TYPE] [-s SLIDING_WINDOW_FLAG] [-w WINDOW_SIZE] [-o OUTPUT_DIRECTORY] [-N NORMALIZATION_FACTOR] [-n FILENAME_IDENTIFIER]
+Usage: python TREE.py -i INPUT_FILE [-t INPUT_TYPE] [-s SLIDING_WINDOW_FLAG] [-w WINDOW_SIZE] [-o OUTPUT_DIRECTORY] [-N NORMALIZATION_FACTOR] [-n FILENAME_IDENTIFIER] [-b BASE_FLAG] [-f OFFSET_VALUE] [-g PLOT_NAME]
 
 Note, the default input type is a FASTA file and the default normalization factor is 1/1000. 
 
@@ -25,8 +25,7 @@ Examples:
 
       1) python TREE.py -i ../examples/seq_example.fasta (input = FASTA file)   
       2) python TREE.py -i ../examples/hamming_example -t DIST (input = distance matrix)
-      3) python TREE.py -i ../examples/seq_example.fasta -s -w 20 -o ../examples/output/ -n test (sliding window analysis)
-
+      3) python TREE.py -i ../examples/seq_example.fasta -s -w 20 -o ../examples/outputs -n test -g outputPlt (sliding window analysis)
 Pipeline:
 
       0) Compute Hamming distance matrix
