@@ -54,7 +54,7 @@ These instructions will get you a copy of the project up and running on your loc
 ``` 
       python TREE.py -i INPUT_FILE [-t INPUT_TYPE] [-s SLIDING_WINDOW_FLAG] [-w WINDOW_SIZE] [-o OUTPUT_DIRECTORY] [-N NORMALIZATION_FACTOR] [-n FILENAME_IDENTIFIER] [-b BASE_FLAG] [-f OFFSET_VALUE] [-g PLOT_NAME]
 ```
-Note, the default input type is a FASTA file and the default normalization factor is 1/1000. 
+Note, the default input type is a FASTA file and the default normalization factor is 1/1000.  
 
 ### Examples:    
 
@@ -82,6 +82,6 @@ Note, the default input type is a FASTA file and the default normalization facto
 
 ## Notes
 
-This software has been tested with python 2.7 and 3.6.1
+This software has been tested with python 2.7 and 3.6.1.
 
 
