@@ -49,6 +49,7 @@ def main():
     rho_pred = []
     window = []
     psi = []
+
     # loop through files in directory and predict recombination
     for file in files:
         avg0, var0, b1 = get_bstats(file)
