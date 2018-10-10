@@ -17,7 +17,7 @@ This software is based upon the work presented in Humphreys, D.P., McGuirl, M.R.
 
 Dependencies: Ripser v1.0.1 (https://github.com/Ripser/ripser), Python 2.7, matplotlib, numpy
 
-To build Ripser:
+To build Ripser v1.0.1:
    git clone --branch v1.0.1 https://github.com/Ripser/ripser.git
    cd ripser 
    make
