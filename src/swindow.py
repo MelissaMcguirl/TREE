@@ -15,14 +15,14 @@ def segWindow(inpMat,numsites):
 #For this, I assume the offset is 1/2 the length.
 	tempMat=[''.join(seq) for seq in zip(*inpMat)]
 	outputMat=list(i for i in tempMat if i!=len(i)*i[0])
-	return	baseWindow([''.join(seq) for seq in zip(*outputMat)],numsites,numsites/2)
+	return	baseWindow([''.join(seq) for seq in zip(*outputMat)],numsites,int(numsites/2))
 
 def baseWindow(inpMat,length,offset):
-	windowmat=[]
-	for inp in inpMat:
-		windowmat.append(vstack(([inp[i:i+length] for i in range(0,len(inp)-length+1,length)],[inp[i:i+length]
-		for i in range(offset,len(inp)-length+offset,length)])).reshape((-1,),order='F'))
-	return windowmat
+    windowmat=[]
+    for inp in inpMat:
+        windowmat.append(vstack(([inp[i:i+length] for i in range(0,len(inp)-length+1,length)],[inp[i:i+length]
+        for i in range(offset,len(inp)-length+offset,length)])).reshape((-1,),order='F'))
+    return windowmat
 
 def process_data(inFile):
     infile = open(inFile, 'r')
@@ -38,12 +38,12 @@ def process_data(inFile):
 
 # get barcode stats per window, print to file
 def getBarCodeStats(s_data, name, OUT):
-    for i in xrange(len(s_data[0])):
+    for i in range(len(s_data[0])):
     # Comput hamming distance and run ripser on each subpopulation
         HammingFile = OUT +  '/Hamm_' + name + '_window_' + str(i) + '.txt'
         RipserFile = OUT + '/Rip_' + name + '_window_' + str(i) + '.txt'
         StatsFile = OUT + '/BStats_' + name + '_window_' + str(i) + '.txt'
-        subPop = [s_data[j][i] for j in xrange(len(s_data))]
+        subPop = [s_data[j][i] for j in range(len(s_data))]
         matrix = empty_matrix(subPop)
         hamm_matrix = populate_matrix(matrix, subPop)
         print_to_file(hamm_matrix, HammingFile)
