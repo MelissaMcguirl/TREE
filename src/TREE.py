@@ -126,7 +126,7 @@ def main():
             print("Begin sliding window...")
         else:
             s_data = segWindow(data, int(N))
-	    print("Begin sliding window...")
+        print("Begin sliding window...")
         print("Sliding window analysis complete.")
         #get barcode stats
         print("Processing barcode statistics...")
