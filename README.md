@@ -18,11 +18,10 @@ This software is based upon the work presented in Humphreys, D.P., McGuirl, M.R.
 Dependencies: Ripser v1.0.1 (https://github.com/Ripser/ripser), Python 2.7, matplotlib, numpy
 
 To build Ripser v1.0.1:
-
-   git clone --branch v1.0.1 https://github.com/Ripser/ripser.git
-   cd ripser
-   make
-   mv ./ripser ~/bin/ripser
+      git clone --branch v1.0.1 https://github.com/Ripser/ripser.git
+      cd ripser
+      make
+      mv ./ripser ~/bin/ripser
 
 Usage: python TREE.py -i INPUT_FILE [-t INPUT_TYPE] [-s SLIDING_WINDOW_FLAG] [-w WINDOW_SIZE] [-o OUTPUT_DIRECTORY] [-N NORMALIZATION_FACTOR] [-n FILENAME_IDENTIFIER] [-b BASE_FLAG] [-f OFFSET_VALUE] [-g PLOT_NAME]
 
