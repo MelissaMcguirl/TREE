@@ -17,7 +17,6 @@ The user has the option getting recombination rate estimates over a sliding wind
 
 This software is based upon the work presented in Humphreys, D.P., McGuirl, M.R., Miyagi, M., and Blumberg, A.J. Fast Estimation of Recombination Rates Using Topological Data Analysis (2018). Preprint: https://www.biorxiv.org/content/early/2018/08/20/395210
 
-
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
