@@ -5,7 +5,7 @@ _Authors:_ Devon P. Humphreys, Melissa R. McGuirl, Michael Miyagi, Andrew J. Blu
 
 For questions/comments please contact Melissa R. McGuirl at melissa_mcguirl@brown.edu.
 
-Warning/Note: You may experience errors with the use of Ripser at this time- curretntly TREE supports Ripser versions older than 0.2.4. A fix is coming in the near future.  
+Warning/Note: You may experience errors with the use of Ripser at this time- curretntly TREE supports a deprecated version of Ripser. A fix is coming in the near future.  
 
 ## Description 
 
