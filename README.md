@@ -5,6 +5,8 @@ _Authors:_ Devon P. Humphreys, Melissa R. McGuirl, Michael Miyagi, Andrew J. Blu
 
 For questions/comments please contact Melissa R. McGuirl at melissa_mcguirl@brown.edu.
 
+Warning/Note: You may experience errors with the use of Ripser at this time- curretntly TREE supports Ripser versions older than 0.2.4. A fix is coming in the near future.  
+
 ## Description 
 
 This software takes as input either (1) a collection of genomes in FASTA format  or (2) a distance matrix and predicts the underlying recombination rate from topological summary statistics of the data. The supported distance matrix formats are those formats that are currently supported by Ripser:
