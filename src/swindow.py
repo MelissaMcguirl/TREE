@@ -7,6 +7,8 @@ import matplotlib.pyplot as plt
 from data_processing import *
 from barcode_stats import *
 from predict_rho import *
+from ripser import ripser 
+
 #Restrictions:
 #NumSites should be even. For reasonable behavior, make offset=length/2
 
@@ -41,17 +43,16 @@ def getBarCodeStats(s_data, name, OUT):
     for i in range(len(s_data[0])):
     # Comput hamming distance and run ripser on each subpopulation
         HammingFile = OUT +  '/Hamm_' + name + '_window_' + str(i) + '.txt'
-        RipserFile = OUT + '/Rip_' + name + '_window_' + str(i) + '.txt'
         StatsFile = OUT + '/BStats_' + name + '_window_' + str(i) + '.txt'
         subPop = [s_data[j][i] for j in range(len(s_data))]
         matrix = empty_matrix(subPop)
         hamm_matrix = populate_matrix(matrix, subPop)
         print_to_file(hamm_matrix, HammingFile)
-        reformat_Hamming(HammingFile)
-        run_Ripser(HammingFile, RipserFile)
-        reformat_Ripser(RipserFile)
+        bars = ripser(hamm_matrix,  distance_matrix=True, maxdim=1)
+        end_point = np.max(hamm_matrix)
+        dim0 = bars['dgms'][0]
+        dim1 = bars['dgms'][1]
     # Get barcode stats
-        end_point, dim0, dim1 = getBars(RipserFile)
         barStats(end_point, dim0, dim1, StatsFile)
         print("Window {0} complete".format(i))
 

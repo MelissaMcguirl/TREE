@@ -19,6 +19,8 @@ from barcode_stats import getBars, barStats
 from predict_rho import *
 import numpy as np
 import argparse
+from ripser import ripser 
+
 
 def main():
 
@@ -79,20 +81,17 @@ def main():
             hamm_matrix = populate_matrix(matrix, lines)
             print("Hamming distance matrix computed.")
             print_to_file(hamm_matrix, HammingFile)
-            reformat_Hamming(HammingFile)
         else:
             HammingFile = inFile
-
+            hamm_matrix = np.loadtxt(HammingFile, dtype='float', delimiter = ',')
         # run ripser.
-        RipserFile = "RipserFile"
-        #cmd = "ripser %s | cut -f 2 -d: | awk 'NR > 1 {print}' | cut -c 3- | sed 's/.$//' > %s" % (HammingFile,  RipserFile)
-        #os.system(cmd)
         print("Running Ripser...")
-        run_Ripser(HammingFile, RipserFile)
+        bars = ripser(hamm_matrix,  distance_matrix=True, maxdim=1)
         print("Ripser analysis complete.")
-        reformat_Ripser(RipserFile)
+        end_point = np.max(hamm_matrix)
+        dim0 = bars['dgms'][0]
+        dim1 = bars['dgms'][1]
         print("Persistent Homology computations complete.")
-        end_point, dim0, dim1 = getBars(RipserFile)
         # compute barcode statistics
         StatsFile = "BCStats"
         print("Computing barcode statistics...")

@@ -77,7 +77,7 @@ def reformat_Hamming(Ham_file):
         print(line)
     return None
 
-# @profile
+# OLD Ripser Function 
 def run_Ripser(HammingFile, RipserFile):
     '''Runs Ripser on the Hamming distance matrix for computation of
     Homology groups for topological data analysis'''
@@ -88,6 +88,7 @@ def run_Ripser(HammingFile, RipserFile):
                             bufsize = -1, executable = '/bin/bash')
     rip.communicate()
 
+# OLD Ripser Function 
 def reformat_Ripser(Ripser_file):
     '''Returns a modified Ripser output file for use with the barcodestats
     module'''
