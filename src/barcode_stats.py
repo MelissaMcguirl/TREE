@@ -17,6 +17,7 @@ import argparse
 import glob
 
 # A function that extracts barcodes from ripser output
+# This function is for old version of Ripser.
 def getBars(RipserFile):
 
     inFile = open(RipserFile, 'r')

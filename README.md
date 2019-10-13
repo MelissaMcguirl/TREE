@@ -5,7 +5,6 @@ _Authors:_ Devon P. Humphreys, Melissa R. McGuirl, Michael Miyagi, Andrew J. Blu
 
 For questions/comments please contact Melissa R. McGuirl at melissa_mcguirl@brown.edu.
 
-Warning/Note: You may experience errors with the use of Ripser at this time- curretntly TREE supports a deprecated version of Ripser. A fix is coming in the near future.  
 
 ## Description 
 
@@ -26,7 +25,7 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 
 #### Programs
-*  Ripser v1.0.1 (https://github.com/Ripser/ripser), 
+*  Ripser.py v0.3.2 (https://ripser.scikit-tda.org/index.html), 
 *  Python 
 
 #### Python libraries
@@ -36,11 +35,8 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Install the ripser program as follows: 
 ```
-      cd 
-      git clone --branch v1.0.1 https://github.com/Ripser/ripser.git
-      cd ripser 
-      make
-      mv ./ripser ~/bin/ripser
+	pip install Cython
+	pip install Ripser
 ```
 
 ### TREE Source 
