@@ -51,7 +51,7 @@ def main():
     parser.add_argument('-n', '--name', action = 'store', required = False,
                         help =''' provide unique identifier for a batch of sliding
                                 window runs''')
-    parser.add_argument('-b', '--base', action = 'store', required = False,
+    parser.add_argument('-b', '--base', action = 'store_true', required = False,
                         help = '''if doing a sliding window analysis, this flag
                             sets the window to move across raw base pairs rather than
                             SNPs. The default behavior is to move over only
@@ -121,7 +121,7 @@ def main():
         print("Data processing done.")
         # get sliding window data
         if args.base:
-            s_data = baseWindow(data, int(N), args.offset)
+            s_data = baseWindow(data, int(N), int(args.offset))
             print("Begin sliding window...")
         else:
             s_data = segWindow(data, int(N))

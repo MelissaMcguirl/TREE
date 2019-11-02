@@ -60,11 +60,12 @@ Note, the default input type is a FASTA file and the default normalization facto
       cd src
       1) python TREE.py -i ../examples/seq_example.fasta (input = FASTA file)   
       2) python TREE.py -i ../examples/hamming_example -t DIST (input = distance matrix)
-      3) python TREE.py -i ../examples/seq_example.fasta -s -w 20 -o ../examples/outputs -n test -g ../examples/outputs/outputPlt (sliding window analysis)
+      3) python TREE.py -i ../examples/seq_example.fasta -s -w 20 -o ../examples/outputs -n test -g ../examples/outputs/outputPlt (sliding window analysis over SNPs)
+      4) python TREE.py -i ../examples/seq_example.fasta -s -b -w 20 -f 10 -o ../examples/outputs -n test -g ../examples/outputs/outputPlt (sliding window analysis over raw bases)
 ```
       
 #### Outputs:
-      Sample expected output for the sliding window analysis is provided in examples/outputs/
+      Sample expected output plot and text file of predictions for the sliding window analysis is provided in examples/outputs/
       
 ### Pipeline:
 
@@ -72,7 +73,7 @@ Note, the default input type is a FASTA file and the default normalization facto
       1) Feed Hamming distance matrix into Ripser to compute dimension 0 and dimension 1 persistent homology barcodes
       2) Extract topological summary statistics (psi, b1, phi)
       3) Predict recombination rate using TREE
-      4) Plot results (for sliding windows)
+      4) Plot results and save predictions to text file (for sliding windows)
 
 ### Help:
       python TREE.py -h
