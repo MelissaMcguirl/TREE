@@ -19,13 +19,13 @@ def segWindow(inpMat,numsites):
 	outputMat=list(i for i in tempMat if i!=len(i)*i[0])
 	return	baseWindow([''.join(seq) for seq in zip(*outputMat)],numsites,int(numsites/2))
 
-def baseWindow(inpMat,length,offset):
-    windowmat=[]
+def baseWindow(inpMat, length, offset):
+    windowmat = []
     for inp in inpMat:
-        windowmat.append(vstack(([inp[i:i+length] for i in range(0,len(inp)-length+1,length)],[inp[i:i+length]
-        for i in range(offset,len(inp)-length+offset,length)])).reshape((-1,),order='F'))
-    return windowmat
-
+        starts = range(0, len(inp) -length + 1, offset)
+        windowmat.append(np.array([inp[s:s+length] for s in starts]))
+    return windowmat 
+    
 def process_data(inFile):
     infile = open(inFile, 'r')
     data = infile.readlines()[1::2]
@@ -100,6 +100,7 @@ def plot_TREE(files, name):
     window = []
     rho_pred = []
     # get stats
+    print('predicted rho', file=open(name + '_rhoPred_all.txt', "a"))
     for file in files:
         avg0, var0, b1 = read_stats(file)
         logrho_pred = log_rho(avg0, var0, b1)
@@ -108,6 +109,7 @@ def plot_TREE(files, name):
         window_start = file.index('window_') + 7
         window_end = file.index('.txt')
         window.append(float(file[window_start:window_end]))
+        print(np.exp(logrho_pred)/1000, file=open(name + '_rhoPred_all.txt', "a"))
 
     # plot
     #f, axarr = plt.subplots(2, 2)
@@ -122,8 +124,8 @@ def plot_TREE(files, name):
     ax1.set_ylabel(r"$\rho$")
     ax1.plot(window, rho_pred, 'b.')
     plt.savefig(name)
-
-# compute mean b1
+    
+    # compute mean b1
 def mean_b1(files):
     b1 = []
     for file in files:
