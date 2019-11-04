@@ -100,7 +100,8 @@ def plot_TREE(files, name):
     window = []
     rho_pred = []
     # get stats
-    print('predicted rho', file=open(name + '_rhoPred_all.txt', "a"))
+    outFile = open(name + '_rhoPred_all.txt', "w")
+    outFile.write('predicted rho \n')
     for file in files:
         avg0, var0, b1 = read_stats(file)
         logrho_pred = log_rho(avg0, var0, b1)
@@ -109,8 +110,9 @@ def plot_TREE(files, name):
         window_start = file.index('window_') + 7
         window_end = file.index('.txt')
         window.append(float(file[window_start:window_end]))
-        print(np.exp(logrho_pred)/1000, file=open(name + '_rhoPred_all.txt', "a"))
-
+        outFile.write(str(np.exp(logrho_pred)/1000))
+        outFile.write('\n')
+    outFile.close()
     # plot
     #f, axarr = plt.subplots(2, 2)
     fig = plt.figure()
